@@ -1,9 +1,9 @@
 window.audios = [
 {
-title:"Warriors",
-artist: "Dan Reynolds",
-cover: "warriors.jpg",
-file: "warriors.wav"
+    title:"Warriors",
+    artist: "Dan Reynolds",
+    cover: "warriors.jpg",
+    file: "warriors.wav"
 },
 {
     title:"Odisseia",
