@@ -1,4 +1,4 @@
-window.audios = [
+export default [
 {
     title:"Warriors",
     artist: "Dan Reynolds",

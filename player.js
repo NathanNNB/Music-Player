@@ -1,18 +1,43 @@
-window.player = {
+import audios from "./data.js";
+import{path} from "./utils.js";
+import elements from "./playerElements.js";
 
-    cover : document.querySelector(".card-image"),
-    title : document.querySelector(".card-content h5"),
-    artist:  document.querySelector(".artist"),
-    audio : document.querySelector("audio"),
+export default{
+
     audioData: audios,
     currentAudio:{},
     currentPlaying: 0,
+    isPlaying: false,
     start(){
+        elements.get.call(this);
+        elements.actions.call(this);
         this.update();
 
         this.audio.onended = () => this.next();
     },
 
+    play(){
+        this.isPlaying = true;
+        this.audio.play();
+        this.playPause.innerText="pause";
+
+    },
+
+    pause(){
+        this.isPlaying = false;
+        this.audio.pause();
+        this.playPause.innerText="play_arrow";
+    },
+
+    togglePlayPause(){
+        if(this.isPlaying ){
+            this.pause();
+        } 
+        else{
+            this.play();
+        }
+
+    },
     next(){
         this.currentPlaying++;
         if(this.currentPlaying == this.audioData.length){
@@ -25,10 +50,13 @@ window.player = {
     update(){
 
         this.currentAudio = this.audioData[this.currentPlaying];
-        this.cover.style.background = `url('${path(player.currentAudio.cover)}') no-repeat center center / cover`;
-        this.title.innerText = player.currentAudio.title;
-        this.artist.innerHTML =  player.currentAudio.artist;
-        this.audio.src = path(player.currentAudio.file);
+        this.cover.style.background = `url('${path(
+            this.currentAudio.cover
+          )}') no-repeat center center / cover`;
+        this.title.innerText = this.currentAudio.title;
+        this.artist.innerHTML =  this.currentAudio.artist;
+        elements.createAudioElement.call(this, path(this.currentAudio.file));
+        
 
     },
     
